@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>Delete Library Record</title>
+  </head>
+  <body>
+    <h1>Are you sure you want to delete this record?</h1>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="button">Yes, Delete</button>
+      <a href="{% url 'library_list' %}" class="button">Cancel</a>
+    </form>
+  </body>
+</html>

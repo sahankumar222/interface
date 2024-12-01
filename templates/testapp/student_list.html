@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% load static%}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>Student List</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f9f9f9;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid #ddd;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        text-align: center;
+      }
+
+      a {
+        text-decoration: none;
+        color: blue;
+      }
+
+      button {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: darkred;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Student List</h1>
+    <a href="{% url 'student_create' %}">Add New Student</a>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Class</th>
+          <th>Photo</th>
+          <th>Video</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in students %}
+        <tr>
+          <td>{{ student.name }}</td>
+          <td>{{ student.student_class }}</td>
+          <td>
+            <img src="{{ student.photo.url }}" width="100" />
+          </td>
+          <td>
+            <video width="200" controls>
+              <source src="{{ student.video.url }}" />
+              Your browser does not support the video tag.
+            </video>
+          </td>
+          <td>
+            <a href="{% url 'student_edit' student.pk %}">Edit</a>
+            <form
+              action="{% url 'student_delete' student.pk %}"
+              method="post"
+              style="display: inline"
+            >
+              {% csrf_token %}
+              <button type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

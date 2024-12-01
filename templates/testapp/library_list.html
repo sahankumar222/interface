@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <title>Library Records</title>
+  </head>
+  <body>
+    <h1>Library Records</h1>
+    <a href="{% url 'library_create' %}" class="button">Add New Record</a>
+    <table>
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>Book Name</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for library in libraries %}
+        <tr>
+          <td>{{ library.student.name }}</td>
+          <td>{{ library.book.name }}</td>
+          <td>{{ library.start_date }}</td>
+          <td>{{ library.end_date }}</td>
+          <td>
+            <a href="{% url 'library_edit' library.pk %}">Edit</a>
+            <form
+              action="{% url 'library_delete' library.pk %}"
+              method="post"
+              style="display: inline"
+            >
+              {% csrf_token %}
+              <button type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

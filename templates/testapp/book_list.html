@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static%}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <title>Book List</title>
+  </head>
+  <body>
+    <h1>Book List</h1>
+    <a href="{% url 'book_create' %}" class="button">Add New Book</a>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Author</th>
+          <th>Publication</th>
+          <th>Year</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for book in books %}
+        <tr>
+          <td>{{ book.name }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.publication }}</td>
+          <td>{{ book.year }}</td>
+          <td>
+            <a href="{% url 'book_edit' book.pk %}">Edit</a>
+            <form
+              action="{% url 'book_delete' book.pk %}"
+              method="post"
+              style="display: inline"
+            >
+              {% csrf_token %}
+              <button type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

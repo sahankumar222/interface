@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'css/homestyle.css' %}?v={{ timestamp }}"
+    />
+    <link rel="icon" href="{% static 'favicon.ico' %}" />
+    <title>Homepage</title>
+  </head>
+  <body>
+    <h1>Welcome to the Management System</h1>
+    <div class="container">
+      <div class="card">
+        <h2>Student Management</h2>
+        <p>Manage students: add, edit, or delete student records.</p>
+        <a href="{% url 'student_list' %}" class="button">Go to Students</a>
+      </div>
+      <div class="card">
+        <h2>Book Management</h2>
+        <p>Manage books: add, edit, or delete book records.</p>
+        <a href="{% url 'book_list' %}" class="button">Go to Books</a>
+      </div>
+      <div class="card">
+        <h2>Library Management</h2>
+        <p>Manage library records: add, edit, or delete records.</p>
+        <a href="{% url 'library_list' %}" class="button">Go to Library</a>
+      </div>
+    </div>
+  </body>
+</html>
